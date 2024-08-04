@@ -1,0 +1,31 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Task {
+  createdAt DateTime        @default(now())
+  dueDate   DateTime?
+  id        String          @id @default(cuid())
+  name      String?
+  status    EnumTaskStatus?
+  updatedAt DateTime        @updatedAt
+}
+
+model Workflow {
+  createdAt   DateTime  @default(now())
+  description String?
+  endDate     DateTime?
+  id          String    @id @default(cuid())
+  name        String?
+  startDate   DateTime?
+  updatedAt   DateTime  @updatedAt
+}
+
+enum EnumTaskStatus {
+  Option1
+}
